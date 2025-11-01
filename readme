@@ -1,0 +1,63 @@
+🧩 Stack technique
+Composant	Technologie	Description
+Backend	Node.js + Fastify	Serveur REST API rapide et modulaire
+Base de données	MongoDB + Mongoose	Stockage des utilisateurs et POI
+Frontend	React + Vite + Leaflet	Interface web moderne et carte dynamique
+Authentification	JWT + Passport.js	Authentification sécurisée
+Stockage d’images	Cloudinary	Hébergement d’images (free tier)
+CI/CD	GitHub Actions	Tests, build et déploiement automatisés
+Conteneurisation	Docker + Docker Compose	Environnement complet
+Documentation API	Swagger (OpenAPI)	Interface de test et documentation
+Tests	Jest + Supertest	Tests unitaires et d’intégration
+
+
+⚙️ Fonctionnalités
+👥 Utilisateurs
+
+Création de compte / login (JWT)
+
+Authentification via Google OAuth2
+
+Profil utilisateur et photo de profil
+
+📍 Points d’intérêt
+
+CRUD complet (ajout, édition, suppression, affichage)
+
+Données : titre, description, image, catégorie, coordonnées
+
+Indexation géospatiale MongoDB (2dsphere)
+
+Géocodage automatique via Nominatim (adresse → coordonnées)
+
+🔍 Recherche
+
+Recherche par nom, catégorie ou proximité
+
+Affichage sur carte avec Leaflet
+
+Popups interactives avec détails et image
+
+💬 Interaction
+
+Commentaires et likes sur les POI
+
+Filtrage par catégorie
+
+Affichage responsive mobile / desktop
+
+🌐 APIs externes utilisées
+API	Utilité	Lien
+Nominatim (OpenStreetMap)	Géocodage (adresse → latitude/longitude)	https://nominatim.openstreetmap.org
+
+
+🌟 Améliorations possibles
+Mode hors-ligne (PWA)
+Heatmap de popularité
+Import de donénes open data (data.gouv.fr)
+IA pour suggérer des lieux similaires
+Intégration GraphQL en option
+
+📄 Licence
+
+Ce projet est sous licence MIT — libre d’utilisation, de modification et de partage.
