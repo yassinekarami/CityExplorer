@@ -1,9 +1,10 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, inject, ViewContainerRef, inputBinding, signal } from '@angular/core';
 import * as L from 'leaflet';
 import { RestaurantService } from '../service/restaurant.service';
 
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { PopupMapContent } from './popup-map-content/popup-map-content';
 
 @Component({
   standalone: true,
@@ -14,6 +15,9 @@ import { Observable } from 'rxjs';
 export class LeafletMapComponent implements AfterViewInit {
   private map!: L.Map;
   private markers: L.Marker[] = [];
+
+  private viewContainer = inject(ViewContainerRef);
+
 
   // Observable for restaurant data
   restaurants$: Observable<Restaurant[]>;
@@ -40,6 +44,26 @@ export class LeafletMapComponent implements AfterViewInit {
     L.tileLayer(baseMapURL).addTo(this.map);
   }
 
+
+  /**
+   * Create a html popup based on the PopupMapComponent
+   * @param nomoffre name of the restautant displayed in the popup
+   * @param type type of the restaurant dispayed in the pop
+   * @returns and html native element
+   */
+  private createPopUpContent(nomoffre: String, type: String) {
+    const componentRef =  this.viewContainer.createComponent(PopupMapContent, {
+      bindings: [
+        inputBinding('nomoffre', signal(nomoffre)),
+        inputBinding('type', signal(type)),
+        
+      ]
+    });
+
+    return componentRef.location.nativeElement;
+  }
+
+
   private addRestaurantsToMap(restaurants: Restaurant[]) {
     if (!restaurants.length) return;
 
@@ -49,7 +73,7 @@ export class LeafletMapComponent implements AfterViewInit {
 
     restaurants.forEach(r => {
       const marker = L.marker([Number(r.latitude), Number(r.longitude)]);
-      marker.addTo(this.map);
+      marker.addTo(this.map).bindPopup(this.createPopUpContent(r.nomoffre, r.type)).openPopup();
       this.markers.push(marker);
     });
 
