@@ -1,0 +1,28 @@
+.snackBarAddedLabel {
+  background-color: #4caf50 !important; /* ✅ green background */
+  color: white !important;              /* white text */
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 10px 16px;                   /* tighter padding */
+  display: inline-block;                /* text fits content */
+  max-width: none !important;           /* remove Angular Material width limit */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+
+.snackBarDeletedLabel {
+  background-color: #ff0000 !important; /* ✅ green background */
+  color: white !important;              /* white text */
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 10px 16px;                   /* tighter padding */
+  display: inline-block;                /* text fits content */
+  max-width: none !important;           /* remove Angular Material width limit */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+
+/* Optional: make sure it's not too wide on large screens */
+.mat-mdc-snack-bar-container {
+  justify-content: center !important;   /* center horizontally */
+}

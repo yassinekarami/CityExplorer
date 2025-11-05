@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
+/**
+ * Service for retreiving / filtring the restaurants 
+ */
 @Injectable({
   providedIn: 'root',
 })
