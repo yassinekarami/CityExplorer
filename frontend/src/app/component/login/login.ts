@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
   standalone: true,
@@ -12,7 +13,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -27,7 +28,9 @@ export class LoginComponent {
 
     const { email, password } = this.loginForm.value;
     console.log('Connexion tentée avec :', email, password);
-    // 👉 Ici tu peux appeler ton service d’authentification
+    this.authService.login(email, password).subscribe(
+      
+    );
   }
 
   get f() {

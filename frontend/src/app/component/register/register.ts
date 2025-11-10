@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
   standalone: true,
@@ -13,7 +14,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -49,7 +50,7 @@ export class RegisterComponent {
 
     const { email, password } = this.registerForm.value;
     console.log('🟢 Inscription réussie :', email, password);
-
+    this.authService.register(email, password).subscribe();
     // 👉 Ici, tu peux appeler ton service d'inscription (API Fastify, etc.)
   }
 }

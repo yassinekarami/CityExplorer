@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
 /**
@@ -15,8 +15,13 @@ export class RestaurantService {
   constructor(private http: HttpClient) {}
 
   // GET request
-  getRestaurants(): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(this.apiUrl);
+  getRestaurants(limit: string, offset: string): Observable<any> {
+    
+    const headers = new HttpHeaders()
+                    .set('limit', limit)
+                    .set("offset", offset);
+    
+    return this.http.get(this.apiUrl, {headers});
   }
  
   

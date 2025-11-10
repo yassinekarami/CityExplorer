@@ -1,41 +1,56 @@
-import { Component, AfterViewInit, inject, ViewContainerRef, inputBinding, signal } from '@angular/core';
+import { Component, AfterViewInit, inject, ViewContainerRef, inputBinding, signal, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { RestaurantService } from '../service/restaurant.service';
+import 'leaflet.markercluster';
+
+
+import { RestaurantService } from '../../service/restaurant/restaurant.service';
 
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { PopupMapContent } from './popup-map-content/popup-map-content';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
+  imports: [MatProgressSpinnerModule, CommonModule],
   selector: 'app-leaflet-map',
   templateUrl: './leaflet-map.html',
   styleUrls: ['./leaflet-map.css']
 })
-export class LeafletMapComponent implements AfterViewInit {
+export class LeafletMapComponent implements AfterViewInit, OnInit{
   private map!: L.Map;
-  private markers: L.Marker[] = [];
+  //private markers: L.Marker[] = [];
+  private markers = L.markerClusterGroup();
+
 
   private viewContainer = inject(ViewContainerRef);
 
 
   // Observable for restaurant data
-  restaurants$: Observable<Restaurant[]>;
+  restaurants$: Observable<Restaurant[]> | undefined;
 
-  constructor(private restaurantService: RestaurantService) {
-    // Expose restaurants as an observable
-    this.restaurants$ = this.restaurantService.getRestaurants().pipe(
-      tap(restaurants => this.addRestaurantsToMap(restaurants))
+  constructor(private restaurantService: RestaurantService) {}
+  ngOnInit(): void { 
+
+    this.restaurants$ = this.restaurantService.getRestaurants("100", "100").pipe(
+        tap({
+          next: restaurants => {
+           
+            if (restaurants && restaurants.length > 0) {
+              this.addRestaurantsToMap(restaurants);
+          }
+          },
+          error: err => {
+              console.error(err);
+          },
+          complete: () => {}
+      })
     );
   }
 
   ngAfterViewInit() {
     this.initMap();
-
-    // Subscribe reactively to restaurants
-    this.restaurants$.subscribe({
-      error: err => console.error('Error fetching restaurants:', err)
-    });
   }
 
   private initMap() {
@@ -67,23 +82,22 @@ export class LeafletMapComponent implements AfterViewInit {
   private addRestaurantsToMap(restaurants: Restaurant[]) {
     if (!restaurants.length) return;
 
-    // Clear previous markers if any
-    this.markers.forEach(m => this.map.removeLayer(m));
-    this.markers = [];
-
     restaurants.forEach(r => {
       const marker = L.marker([Number(r.latitude), Number(r.longitude)]);
-      marker.addTo(this.map).bindPopup(this.createPopUpContent(r.nomoffre, r.type)).openPopup();
-      this.markers.push(marker);
-    });
+      marker.bindPopup(this.createPopUpContent(r.nomoffre, r.type)).openPopup();
+      this.markers.addLayer(marker);
+    })
+
+
+    this.map.addLayer(this.markers);
 
     this.centerMap();
   }
 
   private centerMap() {
-    if (!this.markers.length) return;
+    // if (!this.markers.length) return;
 
-    const bounds = L.latLngBounds(this.markers.map(m => m.getLatLng()));
-    this.map.fitBounds(bounds, { padding: [50, 50] });
+    // const bounds = L.latLngBounds(this.markers.map(m => m.getLatLng()));
+    // this.map.fitBounds(bounds, { padding: [50, 50] });
   }
 }

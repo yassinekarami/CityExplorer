@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { FavoriteService } from '../../service/favorite/favorite.service';
+import { FavoriteService } from '../../../service/favorite/favorite.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
