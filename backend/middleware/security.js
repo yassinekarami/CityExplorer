@@ -2,10 +2,10 @@ import  jwt  from 'jsonwebtoken';
 
 const SECRET_KEY = "RXCT34ZE5GFDSFD756";
 
-exports.checkJWT = async(req, res, next) => {
-
-    let token = req.header['x-access-token'] || req.header['authorization'];
-    if (!!tojen && token.startsWith("Bearer")) 
+const checkJWT = async(req, res) => {
+    
+    let token = req.headers['x-access-token'] || req.headers['authorization'];
+    if (!!token && token.startsWith("Bearer")) 
         token = token.slice(7, token.length);
 
     if (token) {
@@ -25,10 +25,11 @@ exports.checkJWT = async(req, res, next) => {
                 });
 
                 res.header("Authorization", "Bearer "+ newToken);
-                next();
             }
         });
     } else {
         return res.code(401).send("token_required");
     }
 }
+
+export {checkJWT};

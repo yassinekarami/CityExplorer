@@ -42,7 +42,11 @@ const login = async function(req, res) {
                     });
                                 
     res.header('Authorization', 'Bearer ' + token);
-    return res.code(200).send('auth_ok');
+    return res.code(200).send(
+    {
+        user: user,
+        token:'Bearer ' + token
+    });
 
 }
 

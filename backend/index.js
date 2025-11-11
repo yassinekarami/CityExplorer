@@ -5,6 +5,8 @@ import { registerRoute, loginRoute } from './route/auth.route.js';
 
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
+import fastifyMiddie from '@fastify/middie';
+import { checkJWT } from './middleware/security.js';
 
 import dotenv from 'dotenv'
 import { postFavoriteRoute, deleteFavoriteRoute, getFavoritesRoute } from './route/favorite.route.js';
@@ -14,6 +16,7 @@ dotenv.config({ path: './.env' })
 
 async function build() {
   const fastify = Fastify({ logger: false });
+  await fastify.register(fastifyMiddie);
 
   await fastify.register(
     fastifySwagger, {
@@ -44,15 +47,18 @@ async function build() {
     }
   );
 
+
   await fastify.register(async function(app) {
     app.route(getRestaurantsRoute)
     app.route(filterRestaurantsRoute)
   }, { prefix: '/api/restaurants' });
 
   await fastify.register(async function(app) {
-    app.route(getFavoritesRoute)
-    app.route(postFavoriteRoute)
-    app.route(deleteFavoriteRoute)
+
+      app.route(postFavoriteRoute)
+      app.route(getFavoritesRoute)
+      app.route(deleteFavoriteRoute)
+
   }, { prefix: '/api/favorite' });
 
 

@@ -3,7 +3,7 @@ import { register, login } from "../controller/auth.controller.js"
 
 const registerRoute = {
   method: 'POST',
-  url: '/auth/register',
+  url: '/register',
   handler: register,
   schema: {
     body: {
@@ -29,7 +29,7 @@ const registerRoute = {
 
 const loginRoute = {
   method: 'POST',
-  url: '/auth/login',
+  url: '/login',
   handler: login
 }
 

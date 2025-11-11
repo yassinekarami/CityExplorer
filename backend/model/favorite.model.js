@@ -3,9 +3,12 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const favoriteSchema = new Schema({
-    userId: {
-        type: String
-    },
+    // array of userId
+    userId: [
+        {
+            type: String
+        }
+    ],
     nomoffre: {
         type: String
     },
