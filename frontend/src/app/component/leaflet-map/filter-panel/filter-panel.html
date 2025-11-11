@@ -1,0 +1,31 @@
+
+<div class="filter-box">
+  <section  [formGroup]="toppings">
+    <h4>Categories</h4>
+    <p><mat-checkbox formControlName="pizzeria">Pizzeria</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cuisineTraditionnelle">Cuisine traditionnelle</mat-checkbox></p>
+    <p><mat-checkbox formControlName="brasserie">Brasserie</mat-checkbox></p>
+    <p><mat-checkbox formControlName="restaurationRapide">Restauration rapide</mat-checkbox></p>
+    <p><mat-checkbox formControlName="bistrotBarAVin">Bistrot / bar à vin</mat-checkbox></p>
+    <p><mat-checkbox formControlName="restaurantGastronomiqueCuisineRaffinee">Restaurant gastronomique - cuisine raffinée</mat-checkbox></p>
+    <p><mat-checkbox formControlName="creperie">Crêperie</mat-checkbox></p>
+    
+    <p><mat-checkbox formControlName="cuisineDuMonde">Cuisine du Monde</mat-checkbox></p>
+    <p><mat-checkbox formControlName="guinguette">Guinguette</mat-checkbox></p>
+    <p><mat-checkbox formControlName="grillRotisserie">Grill - Rôtisserie</mat-checkbox></p>
+    <p><mat-checkbox formControlName="salonDeThe">Salon de thé</mat-checkbox></p>
+    <p><mat-checkbox formControlName="fruitDeMer">Fruits de mer</mat-checkbox></p>
+    <p><mat-checkbox formControlName="coffeeShop">Coffee-shop</mat-checkbox></p>
+    <p><mat-checkbox formControlName="cafeteria">Cafétéria</mat-checkbox></p>
+
+  </section>
+
+
+</div>
+
+
+<!-- categorie!="Bistrot / bar à vin" or categorie!="Cuisine traditionnelle" or categorie!="Brasserie" or categorie!= "Grill - Rôtisserie" or categorie!="Coffee-shop" or  categorie != "Cafétéria" or categorie != "Salon de thé" or categorie != "Pizzeria" or categorie != "Fruits de mer" or categorie!="Guinguette" or categorie!="Pizzeria" or categorie !="Cuisine traditionnelle" or categorie !="Restauration rapide" or categorie != "Crêperie" or categorie!="Cuisine du Monde" or categorie != "Restaurant gastronomique - cuisine raffinée"or categorie != "Brasserie" -->
+<!-- <section class="example-section" [formGroup]="toppings">
+  <h4>You chose:</h4>
+  {{toppings.value | json}}
+</section> -->

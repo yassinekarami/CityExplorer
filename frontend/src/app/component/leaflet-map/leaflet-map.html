@@ -1,11 +1,12 @@
 
+<app-filter-panel (filterChange)="filterRestaurants($event)" ></app-filter-panel>
 <div id="map" class="map-container"></div>
 
- <div *ngIf="!(restaurants$ | async)" class="spinner-overlay">
+<div *ngIf="!(restaurants$ | async)" class="spinner-overlay">
     <mat-progress-spinner
       color="primary"
       mode="indeterminate"
       diameter="100">
     </mat-progress-spinner>
-  </div>
+</div>
 

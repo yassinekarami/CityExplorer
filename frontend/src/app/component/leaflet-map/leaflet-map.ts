@@ -10,10 +10,11 @@ import { Observable } from 'rxjs';
 import { PopupMapContent } from './popup-map-content/popup-map-content';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { FilterPanel } from './filter-panel/filter-panel';
 
 @Component({
   standalone: true,
-  imports: [MatProgressSpinnerModule, CommonModule],
+  imports: [MatProgressSpinnerModule, CommonModule, FilterPanel],
   selector: 'app-leaflet-map',
   templateUrl: './leaflet-map.html',
   styleUrls: ['./leaflet-map.css']
@@ -31,6 +32,7 @@ export class LeafletMapComponent implements AfterViewInit, OnInit{
   restaurants$: Observable<Restaurant[]> | undefined;
 
   constructor(private restaurantService: RestaurantService) {}
+  
   ngOnInit(): void { 
 
     this.restaurants$ = this.restaurantService.getRestaurants("100", "100").pipe(
@@ -78,7 +80,21 @@ export class LeafletMapComponent implements AfterViewInit, OnInit{
     return componentRef.location.nativeElement;
   }
 
-
+  filterRestaurants($event: any) {
+    console.log($event)
+    // clean all the markers on the map
+    this.markers.clearLayers();
+   
+    this.restaurants$ = this.restaurantService.filterRestaurant($event).pipe(
+      tap({
+        next: restaurants => this.addRestaurantsToMap(restaurants),
+        error: err =>  {
+          console.error(err)
+        },
+        complete: () => {}
+      })
+    )
+  }
   private addRestaurantsToMap(restaurants: Restaurant[]) {
     if (!restaurants.length) return;
 

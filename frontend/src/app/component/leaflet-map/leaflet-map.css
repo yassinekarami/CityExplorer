@@ -21,3 +21,16 @@ html, body {
   background-color: rgba(255, 255, 255, 0.6); /* optional semi-transparent backdrop */
   z-index: 1000;
 }
+
+
+app-filter-panel {
+  position: absolute;
+  top: 20px;       /* distance from top */
+  left: 50px;      /* distance from left */
+  z-index: 500;     /* make sure it appears above the map */
+  background: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  min-width: 200px; /* optional width */
+}

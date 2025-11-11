@@ -14,7 +14,12 @@ export class RestaurantService {
 
   constructor(private http: HttpClient) {}
 
-  // GET request
+  /**
+   * get all the restaurants
+   * @param limit the limit in the api call
+   * @param offset the offset in the api call
+   * @returns return a list of restaurant a limit number of restaurant from the offset 
+   */
   getRestaurants(limit: string, offset: string): Observable<any> {
     
     const headers = new HttpHeaders()
@@ -24,5 +29,14 @@ export class RestaurantService {
     return this.http.get(this.apiUrl, {headers});
   }
  
+
+  /**
+   * filter restaurant list by criteria
+   * @param criteria criteria to filter with
+   * @returns filtred list of restaurant
+   */
+  filterRestaurant(criteria: Object): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/filter`, criteria);
+  }
   
 }
