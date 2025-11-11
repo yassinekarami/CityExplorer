@@ -27,10 +27,7 @@ export class LoginComponent {
     }
 
     const { email, password } = this.loginForm.value;
-    console.log('Connexion tentée avec :', email, password);
-    this.authService.login(email, password).subscribe(
-      
-    );
+    this.authService.login(email, password);
   }
 
   get f() {

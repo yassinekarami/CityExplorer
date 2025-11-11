@@ -25,8 +25,14 @@ export class FavoriteService {
    * @param nomoffre the nae of the restaurant
    * @returns 
    */
-  addFavorite(nomoffre: string): any {
+  addFavorite(userId: string | null, nomoffre: string): any {
+
+    if (!userId) {
+      throw new Error('User ID cannot be null');
+    }
+
     let body = {
+      _id: userId,
       nomoffre: nomoffre
     }
     return this.http.post(this.apiUrl, body)
@@ -41,9 +47,15 @@ export class FavoriteService {
    * @param nomoffre the name of the restaurant
    * @returns  
    */
-  removeFavorite(nomoffre: string): any {
+  removeFavorite(userId: string | null, nomoffre: string): any {
     
-    const params = new HttpParams().set('nomoffre', nomoffre);
+    if (!userId) {
+      throw new Error('User ID cannot be null');
+    }
+
+    const params = new HttpParams()
+                .set("_id", userId)
+                .set('nomoffre', nomoffre);
 
     return this.http.delete(this.apiUrl, {params})
   }

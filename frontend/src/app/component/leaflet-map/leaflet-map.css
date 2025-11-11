@@ -25,7 +25,7 @@ html, body {
 
 app-filter-panel {
   position: absolute;
-  top: 20px;       /* distance from top */
+  top: 70px;       /* distance from top */
   left: 50px;      /* distance from left */
   z-index: 500;     /* make sure it appears above the map */
   background: rgba(255, 255, 255, 0.9); /* semi-transparent white */

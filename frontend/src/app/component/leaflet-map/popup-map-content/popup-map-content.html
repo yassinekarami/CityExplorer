@@ -2,10 +2,12 @@
 <h1>{{nomoffre}}</h1>
 <h2>{{type}}</h2>
 
-<button (click)="addToFavorite(nomoffre)">
-    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="favorite"></mat-icon>
-</button>
+<div *isLogged="isLogged">
+    <button (click)="addToFavorite(nomoffre)">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="favorite"></mat-icon>
+    </button>
 
-<button (click)="removeFromFavorite(nomoffre)">
-    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
-</button>
+    <button (click)="removeFromFavorite(nomoffre)">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+    </button>
+</div>

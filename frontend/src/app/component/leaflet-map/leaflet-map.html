@@ -1,5 +1,6 @@
 
 <app-filter-panel (filterChange)="filterRestaurants($event)" ></app-filter-panel>
+<app-navbar></app-navbar>
 <div id="map" class="map-container"></div>
 
 <div *ngIf="!(restaurants$ | async)" class="spinner-overlay">

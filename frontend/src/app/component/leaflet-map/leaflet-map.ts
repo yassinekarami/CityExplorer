@@ -11,10 +11,11 @@ import { PopupMapContent } from './popup-map-content/popup-map-content';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { FilterPanel } from './filter-panel/filter-panel';
+import { NavbarComponent } from '../shared/navbar/navbar';
 
 @Component({
   standalone: true,
-  imports: [MatProgressSpinnerModule, CommonModule, FilterPanel],
+  imports: [MatProgressSpinnerModule, CommonModule, FilterPanel, NavbarComponent],
   selector: 'app-leaflet-map',
   templateUrl: './leaflet-map.html',
   styleUrls: ['./leaflet-map.css']
